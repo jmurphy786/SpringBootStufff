@@ -1,0 +1,12 @@
+package com.qa.springboot.Repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+
+import com.qa.sprintboot.Database.owners;
+import com.qa.sprintboot.Database.pets;
+
+public interface ownersRepository extends JpaRepository<owners, Long> {
+ 
+	public owners findByName(String name);
+}

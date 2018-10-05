@@ -1,0 +1,11 @@
+spring.datasource.url = jdbc:Mysql://localhost:3306/sakila?useSSL=false
+spring.datasource.username = root
+spring.datasource.password = root
+
+#Hibernate Properties
+#The SQL Dialect makes Hibernate generate better SQL for the chosen database
+spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MYSQL5InnoDBDialect
+
+#Hibernate ddl auto (create, create-drop, validate, update)
+spring.jpa.hibernate.ddl-auto = update
+

@@ -1,0 +1,11 @@
+package com.qa.springboot.Repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.qa.springboot.Database.injuries;
+import com.qa.springboot.Database.pets;
+
+public interface injuriesRepository extends JpaRepository<injuries, Long> {
+ 
+
+}

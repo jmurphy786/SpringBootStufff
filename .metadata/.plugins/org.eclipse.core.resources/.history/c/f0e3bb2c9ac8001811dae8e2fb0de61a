@@ -1,0 +1,141 @@
+package com.qa.springboot.Database;
+
+import java.io.Serializable;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.swing.text.html.HTML.Tag;
+import javax.validation.constraints.NotBlank;
+
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
+
+@Entity
+@Table(name = "pets")
+@EntityListeners(AuditingEntityListener.class)
+@JsonIgnoreProperties(value = {"creationDate", "lastModified"}, allowGetters = true)
+public class pets {
+
+
+		@Id
+		@GeneratedValue(strategy = GenerationType.IDENTITY)
+		private Long petId;
+		
+		@NotBlank
+		private String Address;
+		
+		@NotBlank
+		private String name;
+		
+		private Integer age;
+		
+		private Integer injuryId;
+		
+		@ManyToOne(fetch = FetchType.LAZY, optional = false)
+		@JoinColumn(name = "owner_id", nullable = false)
+		@OnDelete(action = OnDeleteAction.CASCADE)
+		@JsonIgnore
+		private owners owner;
+		
+		
+		@ManyToMany(fetch = FetchType.LAZY,
+	            cascade = {
+	                CascadeType.PERSIST,
+	                CascadeType.MERGE
+	            })
+	    @JoinTable(name = "post_tags",
+	            joinColumns = { @JoinColumn(name = "pet_id") },
+	            inverseJoinColumns = { @JoinColumn(name = "injury_id") })
+	    private Set<injuries> injuries = new HashSet<>();
+		
+	    
+		
+		public pets(String add, String name, Integer age, Integer injuryId) {
+			this.Address = add;
+			this.name = name;
+			this.age = age;
+			this.injuryId = injuryId;
+		}
+		
+		public pets() {
+			this.name = "";
+			this.Address = "";
+			this.age = 0;
+		}
+		
+		
+		public Long getPetId() {
+			return this.petId;
+		}
+		
+		public void setId(Long id) {
+			this.petId = id;
+		}
+		
+		public String getName() {
+			return this.name;
+		}
+		
+		public void setName(String name) {
+			this.name = name;
+		}
+		
+		public String getAddress() {
+			return this.Address;
+		}
+		
+		public void setAddress(String address) {
+			this.Address = address;
+		}
+		
+		public Integer getAge() {
+			return this.age;
+		}
+		
+		public void setAge(Integer age) {
+			this.age = age;
+		}
+		public Integer getInjury() {
+			return this.injuryId;
+		}
+		
+		public void setInjuries(Integer inj) {
+			this.injuryId = inj;
+		}
+		
+		public owners getOwner() {
+			return this.owner;
+		}
+		
+		public void setOwner(owners owner) {
+			this.owner = owner;
+		}
+		
+}

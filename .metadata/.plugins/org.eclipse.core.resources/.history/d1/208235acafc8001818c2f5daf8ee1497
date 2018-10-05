@@ -1,0 +1,15 @@
+package com.qa.springboot.Repository;
+
+import java.awt.print.Pageable;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.qa.springboot.Database.pets;
+
+@Repository
+public interface petsRepository extends JpaRepository<pets, Long> {
+
+
+}

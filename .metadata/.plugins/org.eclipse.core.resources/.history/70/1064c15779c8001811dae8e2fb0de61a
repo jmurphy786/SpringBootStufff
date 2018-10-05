@@ -1,0 +1,30 @@
+package com.qa.springboot.mySpringBootController;
+
+import java.awt.print.Pageable;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.qa.springboot.mySpringBootDatabaseApp.Order;
+import com.qa.springboot.mySpringBootRepository.OrderRepo;
+import com.qa.springboot.mySpringBootRepository.personRepository;
+
+@RestController
+public class PersonController {
+
+	@Autowired
+	private OrderRepo orderRepository;
+	
+	@Autowired
+	private personRepository mySpringBootRepo;
+	
+	@GetMapping("/person/{personId}/orders")
+	public Page<Order> getAllOrdersByPersonId(@PathVariable (value = "person_id") Long personId, Pageable pageable){
+		return orderRepository.findByPersonId(personId, pageable);
+	}
+	
+}

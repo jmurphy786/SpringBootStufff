@@ -1,0 +1,5 @@
+package com.qa.springboot.Repository;
+
+public class petsRepository {
+
+}

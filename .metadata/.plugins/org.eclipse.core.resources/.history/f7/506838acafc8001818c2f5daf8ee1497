@@ -1,0 +1,19 @@
+package com.qa.springboot.Repository;
+
+
+
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.qa.springboot.Database.owners;
+import com.qa.springboot.Database.pets;
+
+@Repository
+public interface ownersRepository extends JpaRepository<owners, Long> {
+ 
+	public owners findByName(String name);
+	Page<owners> findPetByOwnerId(Long ownerId, Pageable pageable);
+}
